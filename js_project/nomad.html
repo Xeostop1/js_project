@@ -8,11 +8,21 @@
   </head>
   <body>
     <script>
-      function ok(name) {
-        alert(name + " 이제는 좀! 되었으면 좋겠다 왜 폴더가 두개인가?! ");
-      }
+      const age = parseInt(prompt("How old are you?"));
 
-      ok("cat");
+      if (isNaN(age) || age < 0) {
+        console.log("Please write a real positive number");
+      } else if (age < 18) {
+        console.log("You are to young");
+      } else if (age >= 18 && age < 51) {
+        console.log("You can drinnk");
+      } else if (age > 50 && age <= 80) {
+        console.log("Sorry careful");
+      } else if (age > 81) {
+        console.log("That's OK!");
+      } else {
+        console.log("Sorry, You can't drinnk");
+      }
     </script>
   </body>
 </html>
