@@ -15,12 +15,63 @@
       //const title = document.getElementById("title");
       const title = document.querySelector(".hello h1");
       const titles = document.querySelectorAll(".hello h1");
-      console.log(titles[2]);
+      console.dir(title);
       //여기서 다양한 attribute을 보고싶다면 console.dir()을 활용하자
       //그래서 보면여기에 textContect가 있는게 보일꺼임 그래서 사용 할 수 있음
       //그리고 innerHTML, innerText도 있음! 그럼 dir로 들어가 있나를 확인해 볼수 있겠네
 
       title.innerText = "DomTree Got you!ㅋㅋ ";
+      //on → 이벤트라고 생각하자!
+      //아 왜스타일에 컬러를 줬는지 알았다 스타일안에 컬러가 있기 때문이네! dir을 확인하자!
+      //바로 내가 가져온 파라미터에 리스너 달기
+
+      function handleTitelClick() {
+        title.style.color = "red";
+      }
+
+      // onclick으로 안해줘도 js단에서 addEventListener로 충분히 써줄 수 있네
+
+      function handleMouse() {
+        title.style.color = "blue";
+        title.innerText = "mouse On!";
+      }
+
+      function handleMouseleave() {
+        title.style.backgroundColor = "orange";
+        title.innerText = "mouseLeave!";
+      }
+
+      function handleRisize() {
+        document.body.style.backgroundColor = "tomato";
+      }
+
+      function handleCopy() {
+        document.body.style.backgroundColor = "lightblue";
+      }
+
+      function wificheckOff() {
+        alert("No Wifi");
+      }
+
+      function wificheckOn() {
+        alert("wifi success");
+      }
+
+      title.addEventListener("click", handleTitelClick);
+      //이게 의미가 클릭을 해야! 함수가 실행되는 리스너를 타이틀에 달아놓은것!
+      //add 이벤트리스너에 왜 함수실행을 넣지 않는가? 거기다 넣으면 바로 실행이 될테니까
+      //앞의 조건을 실행하지 않고 바로 함수가 실행됨 → 그래서 자바스크립트한테 함수명만 주기만 하고
+      //조건이 실행되면 함수 실행! 함수가 실행될 수있게 알려준다고만 생각하자!
+
+      title.addEventListener("mouseenter", handleMouse);
+      //title.onclick=handleMouse; 위와 같은 표현 방식!!
+      title.addEventListener("mouseleave", handleMouseleave);
+      //addEventListener을 쓰는건 나중에 함수로 remove가 가능하기 때문에
+
+      window.addEventListener("resize", handleRisize);
+      window.addEventListener("copy", handleCopy);
+      window.addEventListener("offline", wificheckOff);
+      window.addEventListener("online", wificheckOn);
     </script>
   </body>
 </html>
