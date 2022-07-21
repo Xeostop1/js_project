@@ -9,12 +9,47 @@
       <h1>Hello JS!</h1>
     </div>
 
+
+    <div id="hello2">
+      <h1>Hello</h1>
+    </div>
+
     <script>
       const h1 = document.querySelector("#hello h1");
-      console.log(h1);
+      const h1Color=document.querySelector("#hello2 h1");
+      //console.log(h1);
+      // const on=h1.onclick
+      
+      
+      //이렇게 하면 값이 안나와!!!!!!!!!!! 언디파인도 아니고 아무것도! 
+      //값이랑 바로 비교해 줬네! 
+      h1.addEventListener("click", handleMouse)
 
+     
+      // console.log(h1Style);
+      // console.dir(h1Style);
+      let newColor;
+      
+      //그냥 넣어준게 아니라!!! 위에 tem해서 넣어주기 위에꺼는 
+      //변하면 안되니까! 이렇게도 안된다 ㅠㅠㅠ 왜 뒤쪽에 넣어주지??
       function handleMouse() {
-        h1.innerText = "hello js and dom!";
+        const h1Style=h1.style.color;
+        if(h1Style==="blue"){
+          newColor="tomato";
+        }else {
+          newColor="blue";
+        }
+       h1.style.color=newColor;
+       //함수 마지막에 지정해 줘도 괜찮네
+      }
+      
+      h1Color.addEventListener("click", clickColor)
+      function clickColor(){
+        if(h1Color.style.color==="blue"){
+          h1Color.style.color="tomato";
+        }else{
+          h1Color.style.color="blue"
+        }
       }
     </script>
   </body>
