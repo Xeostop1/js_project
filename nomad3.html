@@ -3,14 +3,24 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      h1{
+        color: lightblue;
+        transition: color .5s ease-in-out ;
+      }
+      .active{
+        color: tomato;
+      }
+    </style>
   </head>
   <body>
+
     <div id="hello">
       <h1>Hello JS!</h1>
     </div>
 
 
-    <div id="hello2">
+    <div id="hello2" class="fontChange">
       <h1>Hello</h1>
     </div>
 
@@ -19,6 +29,9 @@
       const h1Color=document.querySelector("#hello2 h1");
       //console.log(h1);
       // const on=h1.onclick
+      
+  
+      
       
       
       //이렇게 하면 값이 안나와!!!!!!!!!!! 언디파인도 아니고 아무것도! 
@@ -33,6 +46,7 @@
       //그냥 넣어준게 아니라!!! 위에 tem해서 넣어주기 위에꺼는 
       //변하면 안되니까! 이렇게도 안된다 ㅠㅠㅠ 왜 뒤쪽에 넣어주지??
       function handleMouse() {
+
         const h1Style=h1.style.color;
         if(h1Style==="blue"){
           newColor="tomato";
@@ -43,14 +57,23 @@
        //함수 마지막에 지정해 줘도 괜찮네
       }
       
+
+      //먼저 생각해야 할것이!! 보면 우리는 클래스네임으로 css를 주었으니까
+      //그걸 먼저 부여해야지
+      //그리고 css에 있으면 여기서 html로 보내줘도 상관없다!
       h1Color.addEventListener("click", clickColor)
+     
       function clickColor(){
-        if(h1Color.style.color==="blue"){
-          h1Color.style.color="tomato";
-        }else{
-          h1Color.style.color="blue"
+        const createClassName="active";
+        
+        if(h1Color.classList.contains(createClassName)){
+          //alert(" 확인용");
+          h1Color.classList.remove(createClassName);
+        } else{
+          h1Color.classList.add(createClassName);
         }
       }
+      //클래스 네임 add와 remove
     </script>
   </body>
 </html>
