@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="hello">
+      <h1 id="title">Grab me!1</h1>
+      <h1 id="title">Grab me!2</h1>
+      <h1 id="title">Grab me!3</h1>
+    </div>
+
+    <script>
+      //const title = document.getElementById("title");
+      const title = document.querySelector(".hello h1");
+      const titles = document.querySelectorAll(".hello h1");
+      console.log(titles[2]);
+      //여기서 다양한 attribute을 보고싶다면 console.dir()을 활용하자
+      //그래서 보면여기에 textContect가 있는게 보일꺼임 그래서 사용 할 수 있음
+      //그리고 innerHTML, innerText도 있음! 그럼 dir로 들어가 있나를 확인해 볼수 있겠네
+
+      title.innerText = "DomTree Got you!ㅋㅋ ";
+    </script>
+  </body>
+</html>
