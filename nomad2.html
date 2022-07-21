@@ -40,6 +40,23 @@
         title.style.backgroundColor = "orange";
         title.innerText = "mouseLeave!";
       }
+
+      function handleRisize() {
+        document.body.style.backgroundColor = "tomato";
+      }
+
+      function handleCopy() {
+        document.body.style.backgroundColor = "lightblue";
+      }
+
+      function wificheckOff() {
+        alert("No Wifi");
+      }
+
+      function wificheckOn() {
+        alert("wifi success");
+      }
+
       title.addEventListener("click", handleTitelClick);
       //이게 의미가 클릭을 해야! 함수가 실행되는 리스너를 타이틀에 달아놓은것!
       //add 이벤트리스너에 왜 함수실행을 넣지 않는가? 거기다 넣으면 바로 실행이 될테니까
@@ -47,7 +64,14 @@
       //조건이 실행되면 함수 실행! 함수가 실행될 수있게 알려준다고만 생각하자!
 
       title.addEventListener("mouseenter", handleMouse);
+      //title.onclick=handleMouse; 위와 같은 표현 방식!!
       title.addEventListener("mouseleave", handleMouseleave);
+      //addEventListener을 쓰는건 나중에 함수로 remove가 가능하기 때문에
+
+      window.addEventListener("resize", handleRisize);
+      window.addEventListener("copy", handleCopy);
+      window.addEventListener("offline", wificheckOff);
+      window.addEventListener("online", wificheckOn);
     </script>
   </body>
 </html>
