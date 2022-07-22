@@ -6,14 +6,14 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="login-form">
-        <input type="text" placeholder="What is your name?">
-        <button>LogIn</button>
-    </div>
+    <form id="login-form">
+        <input type="text" placeholder="What is your name?" required maxlength="10">
+        <input type="submit" value="LogIn">
+    </form>
     <script>
         const loginForm=document.querySelector("#login-form")
         const loginInput=loginForm.querySelector("input");
-        const loginBtn=loginForm.querySelector("button");
+        //const loginBtn=loginForm.querySelector("button");
 
 
         function login(){
@@ -31,7 +31,17 @@
             }
         //js의 공백 비교는 null 아니고! ""처리해줘도 괜찮다!!
         }
-        loginBtn.addEventListener("click",login);
+        //loginBtn.addEventListener("click",login);
+        // 서브밋에! 뭔가 이벤트를 걸고 싶으면 클릭자리에 서브밋하면돼!
+
+        function submitLogin(){
+            const name =loginInput.value;
+            console.log(name)
+        }
+
+
+        loginInput.addEventListener("submit", submitLogin);
+        //0722 서브밋과 펑션 중간 3:32
         
     </script>
 </body>
