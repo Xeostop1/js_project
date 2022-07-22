@@ -11,6 +11,21 @@
       .active{
         color: tomato;
       }
+
+      .imgadd{
+        border: 1px solid black;
+        width: 200px;
+        height: 200px;
+        transition: 3s ease-in-out;
+      }
+
+      .insertImg{
+        background-image: url("img/img1.png");
+        background-position: center;
+        width: 200px;
+        
+       
+      }
     </style>
   </head>
   <body>
@@ -24,16 +39,42 @@
       <h1>Hello</h1>
     </div>
 
+    <div class="imgadd">
+    </div>
+    
+    
     <script>
       const h1 = document.querySelector("#hello h1");
       const h1Color=document.querySelector("#hello2 h1");
+
+
+      h1Color.addEventListener("click", clickColor)
+     
+     function clickColor(){
+       const createClassName="active";
+       //if대신 토글 사용
+       //아 클래스명을 토글해줘(토글 자체가 on/off이니까!)
+       h1Color.classList.toggle(createClassName);
+       
+     }
+     
+     //================오늘의 예제 토글을 이용해서 그림을 보여주기======================
+     const imgDiv=document.querySelector(".imgadd");
+
+     function imgVi(){
+      const setClassName="insertImg";
+      imgDiv.classList.toggle(setClassName);
+     }
+
+     imgDiv.addEventListener("click",imgVi)
+     //만약에 뭔가 움직임을 주고 싶다하면! 원 div에 넣어줘야함! 그래야 그걸 읽고 실행해줌 신난다 ㅎㅎ 
+     //================성공했다!! div에 넣어줄때에는 꼭 넓이와 높이를 상정해 주자! ======================
+
+
+
       //console.log(h1);
       // const on=h1.onclick
-      
-  
-      
-      
-      
+
       //이렇게 하면 값이 안나와!!!!!!!!!!! 언디파인도 아니고 아무것도! 
       //값이랑 바로 비교해 줬네! 
       h1.addEventListener("click", handleMouse)
@@ -56,24 +97,25 @@
        h1.style.color=newColor;
        //함수 마지막에 지정해 줘도 괜찮네
       }
-      
 
       //먼저 생각해야 할것이!! 보면 우리는 클래스네임으로 css를 주었으니까
       //그걸 먼저 부여해야지
       //그리고 css에 있으면 여기서 html로 보내줘도 상관없다!
-      h1Color.addEventListener("click", clickColor)
+      
+    //   h1Color.addEventListener("click", clickColor)
      
-      function clickColor(){
-        const createClassName="active";
-        
-        if(h1Color.classList.contains(createClassName)){
-          //alert(" 확인용");
-          h1Color.classList.remove(createClassName);
-        } else{
-          h1Color.classList.add(createClassName);
-        }
-      }
-      //클래스 네임 add와 remove
+    //  function clickColor(){
+    //    const createClassName="active";
+       
+    //    if(h1Color.classList.contains(createClassName)){
+    //      //alert(" 확인용");
+    //      h1Color.classList.remove(createClassName);
+    //    } else{
+    //      h1Color.classList.add(createClassName);
+    //    }
+    //  }
+     
+
     </script>
   </body>
 </html>
