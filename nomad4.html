@@ -2,29 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-   
     <title>Document</title>
+    <style>
+        .hidden{
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <form id="login-form1">
+    <h1 class="hidden"></h1>
+    <form id="login_form1">
         <input type="text" placeholder="What is your name?" required maxlength="10">
         <input type="submit" value="LogIn">
     </form>
     <hr>
-    <form id="login-form">
-        <a href="http://naver.com">네이버</a>
-    </form>
+   
 
     <script>
 //==========기본동작을 막는 펑션과 이벤트걸기===============
-    const alink=document.querySelector("#login-form a");
+    const loginForm=document.querySelector("#login_form1")
+    const nameInput=document.querySelector("#login_form1 input");
+    const h1Title=document.querySelector("h1");
+    const HIDDEN_CLASSNAME= "hidden";
+
 
     function stop(event){
         event.preventDefault();
-        console.log(event);
+        const userName=nameInput.value;
+        loginForm.classList.add(HIDDEN_CLASSNAME);
+        console.log(userName);
+        h1Title.classList.remove(HIDDEN_CLASSNAME);
+        //add,remove 모두 클래스명을 꼭 파라미터에 명시해 주자!! 
+        //두개이상 사용하고 있는게 있다면! 꼭 변수화하자!! 
+        h1Title.innerText=`${userName} 환영합니다`
+        //세팅할때는 그냥 이렇게 넣나봐! 벨류는 이미 나온값을 보는거고 
+        console.dir(h1Title);
+        
     }
-    alink.addEventListener("click", stop);
-
+    loginForm.addEventListener("submit", stop);
+//프리이벤트디폴트로 서브밋을 막을 수있다!!! 
     </script>
 </body>
 </html>
