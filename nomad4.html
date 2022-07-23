@@ -11,7 +11,7 @@
 </head>
 <body>
     <h1 class="hidden"></h1>
-    <form id="login_form1">
+    <form id="login_form1" class="hidden">
         <input type="text" placeholder="What is your name?" required maxlength="10">
         <input type="submit" value="LogIn">
     </form>
@@ -24,23 +24,40 @@
     const nameInput=document.querySelector("#login_form1 input");
     const h1Title=document.querySelector("h1");
     const HIDDEN_CLASSNAME= "hidden";
+    const USERNAME_KEY="username";
+    
+    
 
 
-    function stop(event){
+    function loginName(event){
         event.preventDefault();
-        const userName=nameInput.value;
         loginForm.classList.add(HIDDEN_CLASSNAME);
-        console.log(userName);
+        const userName=nameInput.value;
+        localStorage.setItem(USERNAME_KEY, userName);
+        //로컬스토리지에 유저의 이름 저장
         h1Title.classList.remove(HIDDEN_CLASSNAME);
         //add,remove 모두 클래스명을 꼭 파라미터에 명시해 주자!! 
         //두개이상 사용하고 있는게 있다면! 꼭 변수화하자!! 
         h1Title.innerText=`${userName} 환영합니다`
-        //세팅할때는 그냥 이렇게 넣나봐! 벨류는 이미 나온값을 보는거고 
-        console.dir(h1Title);
-        
+        //세팅할때는 그냥 이렇게 넣나봐! 벨류는 이미 나온값을 보는거고   
     }
-    loginForm.addEventListener("submit", stop);
-//프리이벤트디폴트로 서브밋을 막을 수있다!!! 
+    loginForm.addEventListener("submit", loginName);
+    //프리이벤트디폴트로 서브밋을 막을 수있다!!! 
+
+
+//=======================================================================
+ //흐름: 들어가면 사용자 정보가 없다면! 그때서 부터 로그인을 시작하는것!
+ //null이면 클래스명 모두 지우기!(히든이라서)
+//=======================================================================
+    const saveUserName=localStorage.getItem(USERNAME_KEY);
+    console.log(saveUserName);
+    if(saveUserName===null){
+        loginForm.classList.remove(HIDDEN_CLASSNAME);
+        loginForm.addEventListener("submit", loginName);
+    }else{
+        h1Title.innerText=`${saveUserName} 환영합니다`;
+        h1Title.classList.remove(HIDDEN_CLASSNAME);
+    }
     </script>
 </body>
 </html>
