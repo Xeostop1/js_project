@@ -6,33 +6,25 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="login-form">
-        <input type="text" placeholder="What is your name?">
-        <button>LogIn</button>
-    </div>
+    <form id="login-form1">
+        <input type="text" placeholder="What is your name?" required maxlength="10">
+        <input type="submit" value="LogIn">
+    </form>
+    <hr>
+    <form id="login-form">
+        <a href="http://naver.com">네이버</a>
+    </form>
+
     <script>
-        const loginForm=document.querySelector("#login-form")
-        const loginInput=loginForm.querySelector("input");
-        const loginBtn=loginForm.querySelector("button");
+//==========기본동작을 막는 펑션과 이벤트걸기===============
+    const alink=document.querySelector("#login-form a");
 
+    function stop(event){
+        event.preventDefault();
+        console.log(event);
+    }
+    alink.addEventListener("click", stop);
 
-        function login(){
-            const name =loginInput.value;
-            //인풋은 벨류를 꼭 적어줘야 하네! 이너텍스트가 아니라 가지는 게 벨류!! 
-            //순서가 중요하다는게 이거구나!
-            if(name===""){ //나는 name!="" 부정연산어로 사용했는데 무조건 로그인되서 다시 수정
-                console.log(" 이름을 적지않았습니다. 이름을 적어주세요");
-                loginInput.focus();    
-            }else if(name.length>10){
-                console.log(name.length+"글자 이름이 너무 깁니다 10글자로 줄여주세요")
-                loginInput.value="";
-            }else{
-                console.log(name+"님 로그인 되었습니다.");  
-            }
-        //js의 공백 비교는 null 아니고! ""처리해줘도 괜찮다!!
-        }
-        loginBtn.addEventListener("click",login);
-        
     </script>
 </body>
 </html>
