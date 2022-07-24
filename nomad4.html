@@ -1,63 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Document</title>
     <style>
-        .hidden{
-            display: none;
-        }
+      .hidden {
+        display: none;
+      }
+      #backgroundImg img {
+        width: 40%;
+        height: 30%;
+        border: 1px solid red;
+      }
+
+      .imgrandom {
+        transition: 2s ease-in-out;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    <div id="backgroundImg"></div>
+
+    <h2 id="clock">00:00:00</h2>
     <h1 class="hidden"></h1>
     <form id="login_form1" class="hidden">
-        <input type="text" placeholder="What is your name?" required maxlength="10">
-        <input type="submit" value="LogIn">
+      <input
+        type="text"
+        placeholder="What is your name?"
+        required
+        maxlength="10"
+      />
+      <input type="submit" value="LogIn" />
     </form>
-    <hr>
-   
+    <div id="quote">
+      <span></span><br />
+      <span></span>
+    </div>
+    <!-- <img src="img/img1.jpg" alt="" /> -->
 
     <script>
-//==========기본동작을 막는 펑션과 이벤트걸기===============
-    const loginForm=document.querySelector("#login_form1")
-    const nameInput=document.querySelector("#login_form1 input");
-    const h1Title=document.querySelector("h1");
-    const HIDDEN_CLASSNAME= "hidden";
-    const USERNAME_KEY="username";
-    
-    
+      //==========기본동작을 막는 펑션과 이벤트걸기===============
+      const loginForm = document.querySelector("#login_form1");
+      const nameInput = document.querySelector("#login_form1 input");
+      const h1Title = document.querySelector("h1");
+      const HIDDEN_CLASSNAME = "hidden";
+      const USERNAME_KEY = "username";
 
-
-    function loginName(event){
+      function loginName(event) {
         event.preventDefault();
         loginForm.classList.add(HIDDEN_CLASSNAME);
-        const userName=nameInput.value;
+        const userName = nameInput.value;
         localStorage.setItem(USERNAME_KEY, userName);
         //로컬스토리지에 유저의 이름 저장
         h1Title.classList.remove(HIDDEN_CLASSNAME);
-        //add,remove 모두 클래스명을 꼭 파라미터에 명시해 주자!! 
-        //두개이상 사용하고 있는게 있다면! 꼭 변수화하자!! 
-        h1Title.innerText=`${userName} 환영합니다`
-        //세팅할때는 그냥 이렇게 넣나봐! 벨류는 이미 나온값을 보는거고   
-    }
-    loginForm.addEventListener("submit", loginName);
-    //프리이벤트디폴트로 서브밋을 막을 수있다!!! 
+        //add,remove 모두 클래스명을 꼭 파라미터에 명시해 주자!!
+        //두개이상 사용하고 있는게 있다면! 꼭 변수화하자!!
+        h1Title.innerText = `${userName} 환영합니다`;
+        //세팅할때는 그냥 이렇게 넣나봐! 벨류는 이미 나온값을 보는거고
+        paintGreetings(username);
+      }
+      loginForm.addEventListener("submit", loginName);
+      //프리이벤트디폴트로 서브밋을 막을 수있다!!!
+      //===========펑션추가===================================================
 
+      function paintGreetings(username) {
+        h1Title.innerText = `${username} 환영합니다`;
+        h1Title.classList.remove(HIDDEN_CLASSNAME);
+      }
 
-//=======================================================================
- //흐름: 들어가면 사용자 정보가 없다면! 그때서 부터 로그인을 시작하는것!
- //null이면 클래스명 모두 지우기!(히든이라서)
-//=======================================================================
-    const saveUserName=localStorage.getItem(USERNAME_KEY);
-    console.log(saveUserName);
-    if(saveUserName===null){
+      //=======================================================================
+      //흐름: 들어가면 사용자 정보가 없다면! 그때서 부터 로그인을 시작하는것!
+      //null이면 클래스명 모두 지우기!(히든이라서)
+      //=======================================================================
+      const saveUserName = localStorage.getItem(USERNAME_KEY);
+      //console.log(saveUserName);
+      if (saveUserName === null) {
         loginForm.classList.remove(HIDDEN_CLASSNAME);
         loginForm.addEventListener("submit", loginName);
-    }else{
-        h1Title.innerText=`${saveUserName} 환영합니다`;
+      } else {
+        h1Title.innerText = `${saveUserName} 환영합니다`;
         h1Title.classList.remove(HIDDEN_CLASSNAME);
-    }
+        paintGreetings(saveUserName);
+      }
+      //===========시간넣기================================================
+      const clock = document.querySelector("#clock");
+      const date = new Date();
+      const hours = String(date.getHours()).padStart(2, "0");
+      //그냥 바로 여기서 형변환 해주면 되네! 아 왜 생각 못했지!!
+      const minut = String(date.getMinutes()).padStart(2, "0");
+      const second = String(date.getSeconds()).padStart(2, "0");
+
+      function getClock() {
+        clock.innerText = `${hours}:${minut}:${second}`;
+      }
+      //내가 한거는 갱신 안된다 왜????
+      //setTimeout(sayHello, 5000);
+      getClock();
+      setInterval(getClock, 1000);
+
+      //==============랜덤함수를 이용한 명언삽입============================================
+      const quoues = [
+        {
+          quote:
+            "The road to success and the road to failure are almost exactly the same" +
+            "성공으로 가는 길과 실패로 가는 길을 거의 같다.",
+          author: "Colin R. Davis",
+        },
+        {
+          quote:
+            "It is better to fail in originality than to succeed in imitation. 창의적으로 실패하는 것이 모방해서 성공하는 것보다 낫다",
+          author: "Herman Melville",
+        },
+        {
+          quote:
+            "All progress takes place outside the comfort zone.모든 성과는 요령을 피우지 않을 때 생긴다.",
+          author: "Michael John Bobak",
+        },
+        {
+          quote:
+            "Success usually comes to those who are too busy to be looking for it. 성공은 주로 성공을 찾느라 바쁜 사람들에게 찾아온다.",
+          author: "Henry David Thoreau",
+        },
+        {
+          quote:
+            "Success seems to be connected with action. Successful people keep moving. 성공은 행동과 연결되어 있다. 성공적인 사람들은 계속해서 움직인다. ",
+          author: " Conrad Hilton",
+        },
+        {
+          quote:
+            "In order to succeed, we must first believe that we can. 성공하기 위해서, 우리는 먼저 우리 자신이 할 수 있다는 것을 믿어야 한다. ",
+          author: "Nikos",
+        },
+      ];
+      //===================랜덤함수를 이용한 명언삽입============================================
+      const quote = document.querySelector("#quote span");
+      const author = document.querySelector("#quote span:last-child");
+      const randaomNum = Math.floor(Math.random() * quoues.length); //랜덤도 함수니까 꼭 ()쓸수 있도록
+      //아~ 천재네 내가 계속 어레이의 인덱스를 셀수 없잖아! 배열의 렝스를 넣어주면 되겠네
+      //console.log(randaomNum);
+      //console.log(quoues[randaomNum]);
+
+      function quoteView() {
+        quote.innerText = quoues[randaomNum].quote;
+        author.innerText = quoues[randaomNum].author;
+      }
+      quoteView();
+      setInterval(quoteView, 1000);
+
+      //===================랜덤함수를 그림보여주기============================================
+      const BgImg = document.querySelector("#backgroundImg");
+      const Imgarr = [
+        "img1.jpg",
+        "img2.jpg",
+        "img3.jpg",
+        "img4.jpg",
+        "img5.jpg",
+        "img6.jpg",
+        "img7.jpg",
+        "img8.jpg",
+        "img9.jpg",
+        "img10.jpg",
+      ];
+
+      const randomImg = Math.floor(Math.random() * Imgarr.length);
+
+      function imgView() {
+        //BgImg.innerHTML = <img src=`"img/${Imgarr[randomImg]}" `alt="${Imgarr[randaomImg]}">`;
+        BgImg.innerHTML = `<img class="imgrandom" src="img/${Imgarr[randomImg]}" alt="1" />`;
+      }
+      imgView();
     </script>
-</body>
+  </body>
 </html>
